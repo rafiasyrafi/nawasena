@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nawasena — Pembiayaan Teknologi untuk UKM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ns-green: #1D9E75;
+      --ns-green-light: #E1F5EE;
+      --ns-green-mid: #5DCAA5;
+      --ns-amber: #BA7517;
+      --ns-amber-light: #FAEEDA;
+      --ns-coral: #D85A30;
+      --ns-coral-light: #FAECE7;
+      --ns-text: #2C2C2A;
+      --ns-muted: #5F5E5A;
+      --ns-soft: #F1EFE8;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--ns-text); background: #fff; }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem; border-bottom: 0.5px solid #D3D1C7;
+      background: #fff; position: sticky; top: 0; z-index: 100;
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.5rem; color: var(--ns-green); }
+    .nav-logo span { color: var(--ns-amber); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.875rem; color: var(--ns-muted); font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ns-green); }
+    .nav-cta {
+      background: var(--ns-green); color: #fff; border: none;
+      padding: 0.55rem 1.3rem; border-radius: 100px; font-size: 0.875rem;
+      font-weight: 500; cursor: pointer; font-family: var(--sans); transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #0F6E56; }
+
+    /* HERO */
+    .hero-wrapper { max-width: 1100px; margin: 0 auto; }
+    .hero {
+      padding: 5rem 3rem 4rem; display: grid;
+      grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--ns-green-light); color: #0F6E56; font-size: 0.78rem;
+      font-weight: 600; padding: 0.35rem 0.9rem; border-radius: 100px;
+      margin-bottom: 1.25rem; letter-spacing: 0.02em;
+    }
+    .hero-badge::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--ns-green); display: inline-block;
+    }
+    h1 { font-family: var(--serif); font-size: 3rem; line-height: 1.15; color: var(--ns-text); margin-bottom: 1.1rem; }
+    h1 em { color: var(--ns-green); font-style: normal; }
+    .hero-sub { font-size: 1rem; line-height: 1.7; color: var(--ns-muted); margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--ns-green); color: #fff; border: none;
+      padding: 0.75rem 1.8rem; border-radius: 100px; font-size: 0.9rem;
+      font-weight: 600; cursor: pointer; font-family: var(--sans); transition: background 0.2s;
+    }
+    .btn-primary:hover { background: #0F6E56; }
+    .btn-secondary {
+      background: transparent; color: var(--ns-green); border: 1.5px solid var(--ns-green);
+      padding: 0.72rem 1.6rem; border-radius: 100px; font-size: 0.9rem;
+      font-weight: 600; cursor: pointer; font-family: var(--sans); transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--ns-green-light); }
+    .hero-card { background: var(--ns-soft); border-radius: 20px; padding: 2rem; border: 0.5px solid #D3D1C7; }
+    .hero-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .stat-box { background: #fff; border-radius: 12px; padding: 1.1rem; border: 0.5px solid #D3D1C7; }
+    .stat-label { font-size: 0.75rem; color: var(--ns-muted); margin-bottom: 4px; font-weight: 500; }
+    .stat-val { font-size: 1.4rem; font-family: var(--serif); color: var(--ns-text); }
+    .stat-val span { font-size: 0.85rem; font-family: var(--sans); color: var(--ns-green); font-weight: 600; }
+    .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+    .tag {
+      background: #fff; border: 0.5px solid #D3D1C7; border-radius: 100px;
+      padding: 0.3rem 0.9rem; font-size: 0.78rem; color: var(--ns-muted); font-weight: 500;
+    }
+    .tag.active { background: var(--ns-green-light); border-color: var(--ns-green-mid); color: #085041; }
+
+    /* SECTIONS */
+    section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--ns-green); text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .section-title { font-family: var(--serif); font-size: 2.1rem; color: var(--ns-text); margin-bottom: 0.75rem; }
+    .section-sub { font-size: 0.95rem; color: var(--ns-muted); line-height: 1.7; max-width: 520px; }
+
+    /* PRODUCTS */
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+    .product-card { border: 0.5px solid #D3D1C7; border-radius: 16px; padding: 1.6rem; background: #fff; }
+    .product-card.featured { border: 2px solid var(--ns-green); background: var(--ns-green-light); }
+    .popular-badge {
+      display: inline-block; background: var(--ns-green); color: #fff;
+      font-size: 0.7rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 100px; margin-bottom: 0.9rem;
+    }
+    .product-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 1rem; }
+    .icon-rpa { background: var(--ns-amber-light); }
+    .icon-ai { background: var(--ns-green-light); }
+    .icon-iot { background: var(--ns-coral-light); }
+    .product-name { font-family: var(--serif); font-size: 1.25rem; color: var(--ns-text); margin-bottom: 0.4rem; }
+    .product-desc { font-size: 0.85rem; color: var(--ns-muted); line-height: 1.6; margin-bottom: 1.25rem; }
+    .product-range { font-size: 1.5rem; font-family: var(--serif); color: var(--ns-green); margin-bottom: 0.3rem; }
+    .product-rate { font-size: 0.8rem; color: var(--ns-muted); }
+    .product-features { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 0.5px solid #D3D1C7; display: flex; flex-direction: column; gap: 7px; }
+    .product-card.featured .product-features { border-color: var(--ns-green-mid); }
+    .feat-item { font-size: 0.82rem; color: var(--ns-muted); display: flex; align-items: center; gap: 7px; }
+    .feat-item::before { content: ''; width: 14px; height: 14px; border-radius: 50%; background: var(--ns-green); flex-shrink: 0; }
+    .product-card.featured .feat-item { color: #085041; }
+    .apply-btn {
+      width: 100%; margin-top: 1.25rem; background: var(--ns-green); color: #fff;
+      border: none; padding: 0.65rem; border-radius: 100px; font-size: 0.85rem;
+      font-weight: 600; cursor: pointer; font-family: var(--sans); transition: background 0.2s;
+    }
+    .apply-btn:hover { background: #0F6E56; }
+    .product-card:not(.featured) .apply-btn {
+      background: transparent; color: var(--ns-green); border: 1.5px solid var(--ns-green);
+    }
+    .product-card:not(.featured) .apply-btn:hover { background: var(--ns-green-light); }
+
+    /* HOW IT WORKS */
+    .how-it-works { background: var(--ns-soft); padding: 5rem 0; }
+    .how-inner { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 2.5rem; position: relative; }
+    .steps::before {
+      content: ''; position: absolute; top: 28px; left: 60px; right: 60px;
+      height: 1.5px; background: var(--ns-green-mid); opacity: 0.35; z-index: 0;
+    }
+    .step { text-align: center; position: relative; z-index: 1; padding: 0 0.5rem; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%; background: var(--ns-green);
+      color: #fff; font-family: var(--serif); font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+    }
+    .step-title { font-weight: 600; font-size: 0.95rem; color: var(--ns-text); margin-bottom: 0.4rem; }
+    .step-desc { font-size: 0.8rem; color: var(--ns-muted); line-height: 1.6; }
+    .scoring-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 4rem; align-items: center; }
+    .scoring-visual { background: #fff; border-radius: 16px; border: 0.5px solid #D3D1C7; padding: 1.5rem; }
+    .score-bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .score-label { font-size: 0.78rem; color: var(--ns-muted); width: 130px; flex-shrink: 0; font-weight: 500; }
+    .bar-bg { flex: 1; height: 8px; background: #E1F5EE; border-radius: 100px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--ns-green); border-radius: 100px; }
+    .score-pct { font-size: 0.78rem; color: var(--ns-green); font-weight: 600; width: 32px; text-align: right; }
+
+    /* FAQ */
+    .faq-bg { background: var(--ns-soft); padding: 1px 0; }
+    .faq-section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { border: 0.5px solid #D3D1C7; border-radius: 12px; overflow: hidden; }
+    .faq-q {
+      width: 100%; text-align: left; background: #fff; border: none;
+      padding: 1.1rem 1.25rem; font-size: 0.9rem; font-weight: 600;
+      color: var(--ns-text); cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center;
+      font-family: var(--sans); transition: background 0.2s;
+    }
+    .faq-q:hover { background: var(--ns-soft); }
+    .faq-q .arrow { font-size: 1rem; color: var(--ns-green); transition: transform 0.2s; display: inline-block; }
+    .faq-a { display: none; padding: 0 1.25rem 1.1rem; font-size: 0.85rem; color: var(--ns-muted); line-height: 1.7; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+
+    /* FOOTER */
+    footer { background: var(--ns-text); color: #B4B2A9; padding: 4rem 3rem 2rem; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo { font-family: var(--serif); font-size: 1.4rem; color: #fff; margin-bottom: 0.75rem; }
+    .footer-logo span { color: var(--ns-green-mid); }
+    .footer-desc { font-size: 0.82rem; line-height: 1.7; color: #888780; }
+    .footer-col h4 { font-size: 0.8rem; font-weight: 600; color: #fff; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { text-decoration: none; font-size: 0.82rem; color: #888780; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--ns-green-mid); }
+    .footer-bottom { border-top: 0.5px solid #444441; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .footer-copy { font-size: 0.78rem; color: #888780; }
+    .footer-tagline { font-size: 0.78rem; color: var(--ns-green-mid); font-weight: 500; }
+    .trust-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .trust-badge { background: #444441; color: #D3D1C7; font-size: 0.72rem; padding: 0.3rem 0.8rem; border-radius: 100px; font-weight: 500; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.5rem; }
+      h1 { font-size: 2.2rem; }
+      .products-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .steps::before { display: none; }
+      .scoring-row { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      section { padding: 3rem 1.5rem; }
+      .how-inner { padding: 0 1.5rem; }
+      .faq-section { padding: 3rem 1.5rem; }
+      footer { padding: 3rem 1.5rem 1.5rem; }
+    }
+    @media (max-width: 560px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .hero-stat-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGASI -->
+  <nav>
+    <div class="nav-logo">Nawa<span>sena</span></div>
+    <ul class="nav-links">
+      <li><a href="#produk">Produk</a></li>
+      <li><a href="#cara-kerja">Cara Kerja</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <button class="nav-cta">Ajukan Sekarang</button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-wrapper">
+    <div class="hero">
+      <div>
+        <div class="hero-badge">Pembiayaan Teknologi untuk UKM</div>
+        <h1>Tumbuh lebih cerdas dengan <em>teknologi</em> yang terjangkau</h1>
+        <p class="hero-sub">Nawasena menyediakan pembiayaan khusus bagi UKM yang mengadopsi RPA, AI, IoT, dan teknologi terkini — didukung penilaian kredit alternatif dan pendanaan berbasis rantai pasok.</p>
+        <div class="hero-actions">
+          <button class="btn-primary">Cek Kelayakan Anda</button>
+          <button class="btn-secondary">Jelajahi Produk</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-stat-row">
+          <div class="stat-box">
+            <div class="stat-label">Rata-rata pencairan</div>
+            <div class="stat-val">3 <span>hari</span></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Jumlah pinjaman</div>
+            <div class="stat-val">Rp 500M <span>maks</span></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">UKM didanai</div>
+            <div class="stat-val">1.200+ <span>✓</span></div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-label">Tingkat pelunasan</div>
+            <div class="stat-val">97% <span>↑</span></div>
+          </div>
+        </div>
+        <div style="font-size:0.78rem;color:var(--ns-muted);font-weight:500;margin-bottom:8px">Teknologi yang didukung</div>
+        <div class="tech-tags">
+          <span class="tag active">RPA</span>
+          <span class="tag active">Kecerdasan Buatan</span>
+          <span class="tag active">IoT</span>
+          <span class="tag">Cloud ERP</span>
+          <span class="tag">Platform E-Commerce</span>
+          <span class="tag">Keamanan Siber</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARA KERJA -->
+  <div class="how-it-works" id="cara-kerja">
+    <div class="how-inner">
+      <div class="section-label">Cara kerja</div>
+      <div class="section-title">Dari pengajuan hingga adopsi dalam 4 langkah</div>
+      <p class="section-sub">Proses kami yang efisien menggunakan sinyal kredit alternatif dan data rantai pasok agar Anda bisa fokus berkembang, bukan mengurus dokumen.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Ajukan online</div>
+          <div class="step-desc">Isi profil bisnis dan rencana teknologi Anda dalam hitungan menit — tanpa formulir yang rumit.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Penilaian alternatif</div>
+          <div class="step-desc">Kami menganalisis arus kas, riwayat transaksi, dan hubungan rantai pasok bisnis Anda.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Persetujuan & penawaran</div>
+          <div class="step-desc">Terima penawaran pinjaman personal dalam 1–3 hari kerja dengan syarat yang transparan.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-title">Terapkan teknologi</div>
+          <div class="step-desc">Dana dicairkan langsung ke vendor teknologi terverifikasi untuk implementasi yang lancar.</div>
+        </div>
+      </div>
+      <div class="scoring-row">
+        <div>
+          <div class="section-label">Penilaian kredit alternatif</div>
+          <div class="section-title" style="font-size:1.6rem">Kami melihat lebih dari sekadar riwayat kredit</div>
+          <p class="section-sub" style="font-size:0.88rem">Bank konvensional mengandalkan agunan dan riwayat kredit formal. Nawasena menggunakan sinyal bisnis nyata agar UKM mendapatkan kesempatan yang adil untuk berkembang.</p>
+        </div>
+        <div class="scoring-visual">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--ns-muted);margin-bottom:1rem">Rincian kriteria penilaian</div>
+          <div class="score-bar-row"><span class="score-label">Riwayat transaksi</span><div class="bar-bg"><div class="bar-fill" style="width:85%"></div></div><span class="score-pct">85%</span></div>
+          <div class="score-bar-row"><span class="score-label">Jaringan rantai pasok</span><div class="bar-bg"><div class="bar-fill" style="width:72%"></div></div><span class="score-pct">72%</span></div>
+          <div class="score-bar-row"><span class="score-label">Tren pendapatan</span><div class="bar-bg"><div class="bar-fill" style="width:68%"></div></div><span class="score-pct">68%</span></div>
+          <div class="score-bar-row"><span class="score-label">Potensi ROI teknologi</span><div class="bar-bg"><div class="bar-fill" style="width:60%"></div></div><span class="score-pct">60%</span></div>
+          <div class="score-bar-row" style="margin-bottom:0"><span class="score-label">Perilaku pembayaran</span><div class="bar-bg"><div class="bar-fill" style="width:55%"></div></div><span class="score-pct">55%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUK -->
+  <section id="produk">
+    <div class="section-label">Produk pinjaman</div>
+    <div class="section-title">Pembiayaan sesuai kebutuhan teknologi Anda</div>
+    <p class="section-sub">Pilih produk yang sesuai dengan tahap adopsi teknologi dan skala bisnis Anda.</p>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-icon icon-rpa">⚙️</div>
+        <div class="product-name">RPA Pemula</div>
+        <p class="product-desc">Untuk UKM yang memulai otomasi dengan alat robotic process automation guna mengurangi operasi manual.</p>
+        <div class="product-range">Rp 50M – 150M</div>
+        <div class="product-rate">Mulai 0,9% / bulan · Hingga 24 bulan</div>
+        <div class="product-features">
+          <div class="feat-item">Pencairan langsung ke vendor</div>
+          <div class="feat-item">Jadwal cicilan fleksibel</div>
+          <div class="feat-item">Tanpa agunan</div>
+        </div>
+        <button class="apply-btn">Ajukan produk ini</button>
+      </div>
+      <div class="product-card featured">
+        <div class="popular-badge">Paling Populer</div>
+        <div class="product-icon icon-ai">🤖</div>
+        <div class="product-name">AI & Analitik</div>
+        <p class="product-desc">Untuk UKM yang mengimplementasikan AI, platform machine learning, dan kemampuan analitik data.</p>
+        <div class="product-range">Rp 150M – 350M</div>
+        <div class="product-rate">Mulai 1,1% / bulan · Hingga 36 bulan</div>
+        <div class="product-features">
+          <div class="feat-item">Mencakup software + biaya implementasi</div>
+          <div class="feat-item">Tersedia masa tenggang</div>
+          <div class="feat-item">Sumber dana rantai pasok</div>
+        </div>
+        <button class="apply-btn">Ajukan produk ini</button>
+      </div>
+      <div class="product-card">
+        <div class="product-icon icon-iot">📡</div>
+        <div class="product-name">IoT & Infrastruktur</div>
+        <p class="product-desc">Untuk UKM yang mengadopsi perangkat IoT, sensor, perangkat keras konektivitas, dan infrastruktur cloud.</p>
+        <div class="product-range">Rp 200M – 500M</div>
+        <div class="product-rate">Mulai 1,2% / bulan · Hingga 48 bulan</div>
+        <div class="product-features">
+          <div class="feat-item">Pembiayaan hardware + integrasi</div>
+          <div class="feat-item">Pencairan ke banyak vendor</div>
+          <div class="feat-item">Jangka waktu cicilan diperpanjang</div>
+        </div>
+        <button class="apply-btn">Ajukan produk ini</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <div class="faq-bg" id="faq">
+    <div class="faq-section">
+      <div class="section-label">FAQ</div>
+      <div class="section-title">Pertanyaan yang sering diajukan</div>
+      <p class="section-sub">Semua yang perlu Anda ketahui sebelum mengajukan pinjaman.</p>
+      <div class="faq-grid">
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button class="faq-q" onclick="toggleFaq(this)">Siapa yang berhak mengajukan? <span class="arrow">▾</span></button>
+            <div class="faq-a">Setiap UKM yang terdaftar secara resmi di Indonesia, telah beroperasi minimal 1 tahun, dan sedang mengadopsi solusi teknologi yang memenuhi syarat. Kami tidak mensyaratkan riwayat kredit bank formal.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Bagaimana penilaian kredit alternatif bekerja? <span class="arrow">▾</span></button>
+            <div class="faq-a">Kami menilai bisnis Anda menggunakan data operasional nyata — termasuk pola transaksi, hubungan rantai pasok, tren pendapatan, dan proyeksi ROI teknologi — bukan metrik perbankan konvensional.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Berapa lama proses persetujuan? <span class="arrow">▾</span></button>
+            <div class="faq-a">Sebagian besar pemohon menerima keputusan dalam 1–3 hari kerja setelah dokumen lengkap diterima. Pencairan ke vendor biasanya dilakukan dalam 48 jam setelah penandatanganan.</div>
+          </div>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Dokumen apa saja yang dibutuhkan? <span class="arrow">▾</span></button>
+            <div class="faq-a">Izin usaha (NIB/SIUP), 6 bulan rekening koran atau catatan transaksi, penawaran atau proposal vendor teknologi, dan gambaran umum bisnis. Tidak diperlukan laporan keuangan kompleks untuk produk pemula.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Apakah diperlukan agunan? <span class="arrow">▾</span></button>
+            <div class="faq-a">Untuk produk Pemula dan AI, tidak diperlukan agunan. Untuk pinjaman IoT & Infrastruktur di atas Rp 300M, pengaturan jaminan ringan dapat berlaku berdasarkan profil penilaian Anda.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Bisakah saya melunasi pinjaman lebih awal? <span class="arrow">▾</span></button>
+            <div class="faq-a">Ya. Nawasena tidak membebankan penalti pelunasan awal. Jika investasi teknologi Anda menghasilkan imbal hasil yang baik, Anda bebas melunasinya lebih awal tanpa biaya tambahan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="kontak">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">Nawa<span>sena</span></div>
+          <p class="footer-desc">Pembiayaan adopsi teknologi khusus untuk usaha kecil dan menengah Indonesia. Didukung oleh kecerdasan kredit alternatif dan pendanaan rantai pasok.</p>
+          <div class="trust-row">
+            <span class="trust-badge">Terdaftar OJK</span>
+            <span class="trust-badge">ISO 27001</span>
+            <span class="trust-badge">Didukung Rantai Pasok</span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Produk</h4>
+          <ul>
+            <li><a href="#">RPA Pemula</a></li>
+            <li><a href="#">AI & Analitik</a></li>
+            <li><a href="#">IoT & Infrastruktur</a></li>
+            <li><a href="#">Pembiayaan Khusus</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Perusahaan</h4>
+          <ul>
+            <li><a href="#">Tentang Kami</a></li>
+            <li><a href="#">Cara Kerja</a></li>
+            <li><a href="#">Mitra</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontak</h4>
+          <ul>
+            <li><a href="mailto:halo@nawasena.id">halo@nawasena.id</a></li>
+            <li><a href="tel:+622112345678">+62 21 1234 5678</a></li>
+            <li><a href="#">Jakarta, Indonesia</a></li>
+            <li><a href="#">Pusat Bantuan</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 Nawasena. Hak cipta dilindungi. | Kebijakan Privasi · Syarat Penggunaan</span>
+        <span class="footer-tagline">Memberdayakan UKM melalui pembiayaan teknologi</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
